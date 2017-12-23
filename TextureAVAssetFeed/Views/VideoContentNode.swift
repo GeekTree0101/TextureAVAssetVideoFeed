@@ -34,12 +34,11 @@ class VideoContentNode: ASDisplayNode {
         return node
     }()
     
-    lazy var videoNode = { () -> ASVideoNode in
-        let node = ASVideoNode()
+    lazy var videoNode = { () -> GTVideoNode in
+        let node = GTVideoNode(ratio: 0.5,
+                               videoGravity: .resizeAspectFill,
+                               playControlNode: self.playButton)
         node.backgroundColor = UIColor.black.withAlphaComponent(0.05)
-        node.shouldAutoplay = false
-        node.shouldAutorepeat = false
-        node.muted = true
         return node
     }()
     
@@ -90,32 +89,17 @@ class VideoContentNode: ASDisplayNode {
         self.backgroundColor = .white
         self.automaticallyManagesSubnodes = true
     }
+    
+    @objc func replay() {
+        self.videoNode.replayVideo()
+    }
 }
 
 extension VideoContentNode {
     func configure(video: Video) {
         self.titleNode.attributedText = TextStyle.title.attributedText(video.title)
         self.decriptionNode.attributedText = TextStyle.description.attributedText(video.description)
-        self.cachingAssetOnVideoNode(video.url)
-    }
-    
-    func cachingAssetOnVideoNode(_ url: URL) {
-        // update state
-        self.state = .readyToPlay(url)
-        
-        // create asset
-        let asset = AVAsset(url: url)
-        
-        // load asynchronusly
-        asset.loadValuesAsynchronously(forKeys: ["playable"], completionHandler: {
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3.0, execute: {
-                // don't auto loading
-                asset.cancelLoading()
-                
-                // set assset on ASVideoNode
-                self.videoNode.asset = asset
-            })
-        })
+        self.videoNode.setVideoAsset(video.url, isCache: true)
     }
 }
 
@@ -140,43 +124,5 @@ extension VideoContentNode {
                                                            titleNode,
                                                            decriptionNode])
         return ASInsetLayoutSpec(insets: Const.insets, child: stackLayoutSpec)
-    }
-}
-
-// MARK - Intelligent Preloading LifeCycle
-extension VideoContentNode {
-    override func didEnterVisibleState() {
-        super.didEnterVisibleState()
-        self.play()
-    }
-    
-    override func didExitVisibleState() {
-        super.didExitVisibleState()
-        self.pause()
-    }
-}
-
-// MARK - Video ControlEvent
-extension VideoContentNode {
-    @objc func replay() {
-        guard let state = self.state, case .pause(let url) = state else { return }
-        self.state = .readyToPlay(url)
-        self.play(forcePlay: true)
-    }
-    
-    func play(forcePlay: Bool = false) {
-        guard let state = self.state, case .readyToPlay(let url) = state else { return }
-        self.videoNode.play()
-        self.playButton.isHidden = true
-        self.videoNode.playerLayer?.videoGravity = .resizeAspectFill
-        self.state = .play(url)
-    }
-    
-    func pause() {
-        guard let state = self.state, case .play(let url) = state else { return }
-        self.videoNode.pause()
-        self.playButton.isHidden = false
-        self.videoNode.asset?.cancelLoading()
-        self.state = .pause(url)
     }
 }

@@ -17,6 +17,7 @@
 		9BCAF3381FEE27E400421532 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAF3371FEE27E400421532 /* Video.swift */; };
 		9BCAF33A1FEE291D00421532 /* VideoCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAF3391FEE291D00421532 /* VideoCellNode.swift */; };
 		9BCAF33C1FEE2C9800421532 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BCAF33B1FEE2C9800421532 /* Launch Screen.storyboard */; };
+		9BCAF33E1FEE346D00421532 /* GTVideoNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAF33D1FEE346D00421532 /* GTVideoNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		9BCAF3371FEE27E400421532 /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		9BCAF3391FEE291D00421532 /* VideoCellNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCellNode.swift; sourceTree = "<group>"; };
 		9BCAF33B1FEE2C9800421532 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		9BCAF33D1FEE346D00421532 /* GTVideoNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GTVideoNode.swift; sourceTree = "<group>"; };
 		D3C690D8D82713C5F4B641F7 /* Pods_TextureAVAssetFeed.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TextureAVAssetFeed.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEB3AE640175BCAA8E3640AA /* Pods-TextureAVAssetFeed.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TextureAVAssetFeed.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TextureAVAssetFeed/Pods-TextureAVAssetFeed.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -158,6 +160,7 @@
 			children = (
 				9BCAF3351FEE278500421532 /* VideoContentNode.swift */,
 				9BCAF3391FEE291D00421532 /* VideoCellNode.swift */,
+				9BCAF33D1FEE346D00421532 /* GTVideoNode.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -379,6 +382,7 @@
 			files = (
 				9BCAF33A1FEE291D00421532 /* VideoCellNode.swift in Sources */,
 				9BCAF3361FEE278500421532 /* VideoContentNode.swift in Sources */,
+				9BCAF33E1FEE346D00421532 /* GTVideoNode.swift in Sources */,
 				9B86D7921FEE2637007ABFD9 /* AppDelegate.swift in Sources */,
 				9BCAF3341FEE270100421532 /* VideoFeedViewController.swift in Sources */,
 				9BCAF3381FEE27E400421532 /* Video.swift in Sources */,
